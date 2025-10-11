@@ -314,22 +314,25 @@ saveas(gcf, 'histogram_F.eps', 'epsc');
 X_hat_F = squeeze(estimation(:, :, 6));
 E_F = X_hat_F - m';              
 Cov_est_F = cov(E_F);
+mean_E_F = mean(E_F)';
 
 %estimation
 x_elipsa = repmat(0 , 1, length(t)) + K*chol(Cov_est_F, 'lower') * u;
 grid on;
 hold on;
+plot(E_F(:,1), E_F(:,2), '.', 'Color', [0.6 0.6 0.6])
 plot(x_elipsa(1, :), x_elipsa(2, :))
 
 %theoretical
 x_elipsa = repmat(0 , 1, length(t)) + K*chol(Cov_er_F, 'lower') * u;
 plot(x_elipsa(1, :), x_elipsa(2, :))
 
-legend('estimation', 'theoretical');
+legend('realizations', 'estimation', 'theoretical');
 xlabel('e_1 (position error)');
 ylabel('e_2 (velocity error)');
 title('Estimation error covariance ellipse for point F');
 
 saveas(gcf, 'ellipse_F.eps', 'epsc');
+
 
 
