@@ -158,6 +158,21 @@ ylabel('e_2 (velocity error)');
 title('Theoretical error covariance ellipses');
 legend('A', 'B', 'C', 'D', 'E', 'F');
 
+K = 3; % 3-sigma
+
+A_A = pi * K^2 * sqrt(det(Cov_er_A));
+A_B = pi * K^2 * sqrt(det(Cov_er_B));
+A_C = pi * K^2 * sqrt(det(Cov_er_C));
+A_D = pi * K^2 * sqrt(det(Cov_er_D));
+A_E = pi * K^2 * sqrt(det(Cov_er_E));
+A_F = pi * K^2 * sqrt(det(Cov_er_F));
+
+areas = table(A_A, A_B, A_C, A_D, A_E, A_F, ...
+    'VariableNames', {'A','B','C','D','E','F'});
+
+disp('Areas of 3-sigma ellipses:');
+disp(areas);
+
 saveas(gcf, 'elipses.eps', 'epsc');
 
 %% realization of stochastic process 
@@ -333,6 +348,7 @@ ylabel('e_2 (velocity error)');
 title('Estimation error covariance ellipse for point F');
 
 saveas(gcf, 'ellipse_F.eps', 'epsc');
+
 
 
 
